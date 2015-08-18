@@ -1,4 +1,4 @@
-package org.ufm;
+package org.ufm.datum.dto;
 
 import javax.jms.TextMessage;
 
