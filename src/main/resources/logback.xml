@@ -12,7 +12,9 @@
         </encoder>
     </appender>
 
-    <logger name="org.ufm" level="DEBUG"/>
+    <logger name="org.ufm" level="DEBUG">
+        <appender-ref ref="STDOUT" />
+    </logger>
 
     <root level="INFO">
         <appender-ref ref="STDOUT"/>
