@@ -11,7 +11,7 @@ JDK 1.8
 ## Framework
 Spring Boot
 
-Drools (**Rule Engine**)
+Drools (**Rule Engine for BI**)
 
 ## Extension
 JMX
