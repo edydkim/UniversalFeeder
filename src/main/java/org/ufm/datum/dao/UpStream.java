@@ -1,4 +1,4 @@
-package org.ufm;
+package org.ufm.datum.dao;
 
 import java.util.ArrayList;
 import java.util.List;
