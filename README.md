@@ -8,17 +8,17 @@ see below for details..
 ## SDK
 JDK 1.8
 
-## Framework & Libraries
+## Framework
 Spring Boot
 
-Google Guava
-
-Drools (Rule Engine)
+Drools (**Rule Engine**)
 
 ## Extension
 JMX
 
 JMS
+
+Google Guava
 
 ## Build
 Maven
