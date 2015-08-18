@@ -1,4 +1,4 @@
-package org.ufm;
+package org.ufm.process;
 
 import org.ufm.datum.dao.UpStream;
 import org.ufm.datum.dto.Stream;
