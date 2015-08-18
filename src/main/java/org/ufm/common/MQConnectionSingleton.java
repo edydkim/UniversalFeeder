@@ -1,4 +1,4 @@
-package org.ufm;
+package org.ufm.common;
 
 import com.ibm.mq.jms.JMSC;
 import com.ibm.mq.jms.MQQueueConnection;
