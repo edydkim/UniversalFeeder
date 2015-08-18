@@ -1,4 +1,4 @@
-package org.ufm;
+package org.ufm.conf;
 
 import org.ufm.datum.dao.UpStream;
 import org.ufm.listener.JobCompletionNotificationListener;
