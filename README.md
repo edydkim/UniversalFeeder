@@ -7,10 +7,11 @@ see below for details..
 ## SDK
 JDK 1.8
 
-## Framework
+## Framework & Libraries
 Spring Boot
 
 Google Guava
+Drools (Rule Engine)
 
 ## Extension
 JMX
