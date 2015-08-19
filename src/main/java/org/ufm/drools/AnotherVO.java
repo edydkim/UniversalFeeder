@@ -1,6 +1,8 @@
 package org.ufm.drools;
 
-
+/**
+ * Created by edydkim on 2015/08.
+ */
 public class AnotherVO {
     private String stringValue;
     private boolean booleanValue;
