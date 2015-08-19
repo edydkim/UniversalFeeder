@@ -15,6 +15,9 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 
+/**
+ * Created by edydkim on 2015/08.
+ */
 @EnableScheduling
 @EnableBatchProcessing
 public class JobRunner {
