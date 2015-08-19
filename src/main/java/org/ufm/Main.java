@@ -8,6 +8,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import javax.jms.JMSException;
 
+/**
+ * Created by edydkim on 2015/08.
+ */
 @SpringBootApplication
 public class Main {
     private static final Logger log = LoggerFactory.getLogger(Main.class);
