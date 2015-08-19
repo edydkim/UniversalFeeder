@@ -8,7 +8,9 @@ import org.drools.runtime.StatefulKnowledgeSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-
+/**
+ * Created by edydkim on 2015/08.
+ */
 public class RunRuleEngine {
     private static final Logger logger = LoggerFactory.getLogger(RunRuleEngine.class);
 
@@ -43,7 +45,7 @@ public class RunRuleEngine {
         // NOTE: you can add another VO object to same session; filtering to use instanceof VO type.
         /* <-
         AnotherVO avo = new AnotherVO();
-        avo.setStringValue("test");
+        avo.setStringValue("second");
         avo.setBooleanValue(true);
         ksession.insert(avo);
         */
