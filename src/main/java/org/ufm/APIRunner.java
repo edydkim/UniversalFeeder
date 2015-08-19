@@ -13,6 +13,9 @@ import org.springframework.http.HttpStatus;
 
 import java.util.concurrent.TimeUnit;
 
+/**
+ * Created by edydkim on 2015/08.
+ */
 @Configuration
 @ComponentScan
 public class APIRunner {
