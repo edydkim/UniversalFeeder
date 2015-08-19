@@ -1,1 +1,14 @@
 // For Drools Here..
+package org.ufm.drools.rules
+
+import org.ufm.drools.BasicVO
+
+rule "Basic Transaction Transforming Rule"
+
+when
+$vo: BasicVO(stringValue == "first", $booleanValue: booleanValue)
+eval($booleanValue)
+then
+    System.out.println("First Rule");
+$vo.setStringValue("Done.");    
+end
