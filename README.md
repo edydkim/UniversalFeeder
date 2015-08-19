@@ -20,6 +20,8 @@ JMS
 
 Google Guava
 
+Google joox
+
 ## Build
 Maven
 
