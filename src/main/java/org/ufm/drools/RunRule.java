@@ -20,7 +20,7 @@ public class RunRule {
         KnowledgeBuilderErrors errors = kbuilder.getErrors();
         if (errors.size() > 0) {
             for (KnowledgeBuilderError error: errors) {
-                System.err.println(error);
+                logger.error("KnowledgeBuilderError: ", error);
             }
             throw new IllegalArgumentException("Could not parse knowledge.");
         }
