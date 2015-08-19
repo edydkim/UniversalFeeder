@@ -9,8 +9,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 
-public class RunRule {
-    private static final Logger logger = LoggerFactory.getLogger(RunRule.class);
+public class RunRuleEngine {
+    private static final Logger logger = LoggerFactory.getLogger(RunRuleEngine.class);
 
     private static KnowledgeBase kbase;
 
@@ -32,17 +32,28 @@ public class RunRule {
         setup();
 
         StatefulKnowledgeSession ksession = kbase.newStatefulKnowledgeSession();
+        
         // NOTE: <- KnowledgeRuntimeLogger krLogger = KnowledgeRuntimeLoggerFactory.newFileLogger(ksession, "basic");
 
         BasicVO vo = new BasicVO();
         vo.setStringValue("first");
         vo.setBooleanValue(true);
         ksession.insert(vo);
+        
+        // NOTE: you can add another VO object to same session; filtering to use instanceof VO type.
+        /* <-
+        AnotherVO avo = new AnotherVO();
+        avo.setStringValue("test");
+        avo.setBooleanValue(true);
+        ksession.insert(avo);
+        */
+        
         ksession.fireAllRules();
         ksession.getObjects().stream().filter(o -> o instanceof RoolVO).forEach(o -> {
             assertEquals("Done.", ((RoolVO) o).getStringValue());
             logger.info("Transformed value: " + vo.getStringValue());
         });
+        
         // NOTE: <- krLogger.close();
     }
 
