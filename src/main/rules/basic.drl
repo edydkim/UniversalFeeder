@@ -2,13 +2,27 @@
 package org.ufm.drools.rules
 
 import org.ufm.drools.BasicVO
+import org.ufm.drools.AnotherVO
+import org.slf4j.Logger;
+
+global Logger logger;
 
 rule "Basic Transaction Transforming Rule"
+    // no-loop
+    when
+        $vo: BasicVO(stringValue == "first", $booleanValue: booleanValue)
+    eval($booleanValue)
+    then
+        System.out.println("First Rule");
+        $vo.setStringValue("Done.");    
+    end
 
-when
-$vo: BasicVO(stringValue == "first", $booleanValue: booleanValue)
-eval($booleanValue)
-then
-    System.out.println("First Rule");
-$vo.setStringValue("Done.");    
-end
+rule "Another Transaction Transforming Rule"
+    // no-loop
+    when
+        $vo: AnotherVO(stringValue == "second", $booleanValue: booleanValue)
+    eval($booleanValue)
+    then
+        System.out.println("Second Rule");
+        $vo.setStringValue("Done.");    
+    end
