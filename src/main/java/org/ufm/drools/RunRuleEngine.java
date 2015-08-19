@@ -48,6 +48,7 @@ public class RunRuleEngine {
         ksession.insert(avo);
         */
         
+        ksession.setGlobal("logger", logger);
         ksession.fireAllRules();
         ksession.getObjects().stream().filter(o -> o instanceof RoolVO).forEach(o -> {
             assertEquals("Done.", ((RoolVO) o).getStringValue());
