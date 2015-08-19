@@ -11,8 +11,8 @@ import org.slf4j.LoggerFactory;
 /**
  * Created by edydkim on 2015/08.
  */
-public class RunRuleEngine {
-    private static final Logger logger = LoggerFactory.getLogger(RunRuleEngine.class);
+public class RulesEngineRunner {
+    private static final Logger logger = LoggerFactory.getLogger(RulesEngineRunner.class);
 
     private static KnowledgeBase kbase;
 
