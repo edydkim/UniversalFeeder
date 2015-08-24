@@ -10,7 +10,7 @@ global Logger logger;
 rule "Basic Transaction Transforming Rule"
     // no-loop
     when
-        $vo: BasicVO(stringValue == "first", $booleanValue: booleanValue)
+        $vo: BasicVO(stringValue in ("first"), $booleanValue: booleanValue)
     eval($booleanValue)
     then
         System.out.println("First Rule");
@@ -20,7 +20,7 @@ rule "Basic Transaction Transforming Rule"
 rule "Another Transaction Transforming Rule"
     // no-loop
     when
-        $vo: AnotherVO(stringValue == "second", $booleanValue: booleanValue)
+        $vo: AnotherVO(stringValue == "second")
     then
         System.out.println("Second Rule");
         $vo.setStringValue("Done.");    
