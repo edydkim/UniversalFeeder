@@ -21,7 +21,6 @@ rule "Another Transaction Transforming Rule"
     // no-loop
     when
         $vo: AnotherVO(stringValue == "second", $booleanValue: booleanValue)
-    eval($booleanValue)
     then
         System.out.println("Second Rule");
         $vo.setStringValue("Done.");    
