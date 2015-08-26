@@ -1,5 +1,6 @@
 package org.ufm.drools;
 
+import org.ufm.enums.TransactionEnum;
 import org.joox.JOOX;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
