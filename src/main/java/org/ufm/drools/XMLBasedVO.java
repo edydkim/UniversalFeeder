@@ -55,6 +55,7 @@ public class XMLBasedVO<T> implements VO<T> {
         private String system;
         private String user;
         private String version;
+        
         private Entity entity;
         private Price price;
         private Charge charge;
