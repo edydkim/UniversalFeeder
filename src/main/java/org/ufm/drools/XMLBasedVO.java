@@ -48,7 +48,7 @@ public class XMLBasedVO<T> implements VO<T> {
         this.transaction = new Transaction();
 
         // Init for filtering
-        this.ref = this.getTransaction().getRef();
+        this.ref = this.getTransaction().getSystem();
     }
 
     public static class Transaction {
