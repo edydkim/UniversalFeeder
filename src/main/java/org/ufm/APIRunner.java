@@ -18,6 +18,7 @@ import java.util.concurrent.TimeUnit;
  */
 @Configuration
 @ComponentScan
+@Executable(expected = APIRunner.class, info = "apiRunner")
 public class APIRunner {
     private static final Logger log = LoggerFactory.getLogger(APIRunner.class);
 
