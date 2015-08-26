@@ -20,6 +20,7 @@ import org.springframework.scheduling.annotation.Scheduled;
  */
 @EnableScheduling
 @EnableBatchProcessing
+@Executable(expected = JobRunner.class, info = "jobRunner")
 public class JobRunner {
     private static final Logger log = LoggerFactory.getLogger(JobRunner.class);
 
