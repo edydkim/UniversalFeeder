@@ -10,6 +10,8 @@ import javax.jms.TextMessage;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import org.ufm.drools.XMLBasedVO;
+
 
 @Component
 public class ReceiverMessageListener implements MessageListener {
@@ -34,7 +36,12 @@ public class ReceiverMessageListener implements MessageListener {
         log.debug("Receiver Counter: " + latchCounter.get());
 
         try {
-            // TODO: do something..
+            // Case 1, XMLBasedVO
+            log.trace("Source read: " + textMessage.getText());
+            VO<XMLBasedVO> vo = new XMLBasedVO(textMessage.getText());
+            log.debug("XMLBasedVO: " + vo.getRef());
+            
+            // TODO: do something more...
             Thread.sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
