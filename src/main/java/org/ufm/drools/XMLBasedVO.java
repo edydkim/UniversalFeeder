@@ -61,8 +61,6 @@ public class XMLBasedVO<T> implements VO<T> {
         private Price price;
         private Charge charge;
 
-        // extra
-        private String category;
         // TODO: add more, see the matrix for further req..
 
         public Transaction() {
