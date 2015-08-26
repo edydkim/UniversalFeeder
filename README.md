@@ -1,5 +1,5 @@
 ## UniversalFeeder
-Universal UpStream Feeder Manager
+Universal UpStream Feeder Manager for BI - Data Analysing and Mining.
 
 Supporting for Reactive Platform - Asynchronous and Event Handler
 
