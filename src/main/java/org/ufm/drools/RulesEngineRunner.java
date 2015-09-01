@@ -15,6 +15,17 @@ public class RulesEngineRunner {
     private static final Logger logger = LoggerFactory.getLogger(RulesEngineRunner.class);
 
     private static KnowledgeBase kbase;
+    
+    // Thread-Safe
+    private RulesEngineRunner() {}
+
+    private static class RuleEngineRunnerHolder {
+        private static final RulesEngineRunner instance = new RulesEngineRunner();
+    }
+
+    public static RulesEngineRunner getInstance() {
+        return RuleEngineRunnerHolder.instance;
+    }
 
     public static void setup() {
         KnowledgeBuilder kbuilder = KnowledgeBuilderFactory.newKnowledgeBuilder();
@@ -30,34 +41,40 @@ public class RulesEngineRunner {
         kbase.addKnowledgePackages(kbuilder.getKnowledgePackages());
     }
 
-    public static void main(String[] args) {
-        setup();
+    public Collection<Object> doFact(VO vo) throws IOException, SAXException {
+        if (kbase == null)  setup();
 
         StatefulKnowledgeSession ksession = kbase.newStatefulKnowledgeSession();
         
         // NOTE: <- KnowledgeRuntimeLogger krLogger = KnowledgeRuntimeLoggerFactory.newFileLogger(ksession, "basic");
 
-        BasicVO vo = new BasicVO();
-        vo.setStringValue("first");
-        vo.setBooleanValue(true);
         ksession.insert(vo);
-        
-        // NOTE: you can add another VO object to same session; filtering to use instanceof VO type.
-        /* <-
-        AnotherVO avo = new AnotherVO();
-        avo.setStringValue("second");
-        avo.setBooleanValue(true);
-        ksession.insert(avo);
-        */
-        
+
         ksession.setGlobal("logger", logger);
         ksession.fireAllRules();
-        ksession.getObjects().stream().filter(o -> o instanceof RoolVO).forEach(o -> {
-            assertEquals("Done.", ((RoolVO) o).getStringValue());
+
+        // <- logger.close();
+
+        return ksession.getObjects();
+    }
+
+    public static void main(String[] args) {
+        Collection<Object> objects = RulesEngineRunner.getInstance().doFact(new BasicVO(""));
+
+        ksession.getObjects().stream().filter(o -> o instanceof BasicVO).forEach(o -> {
+            assertEquals("Done.", ((BasicVO) o).getStringValue());
             logger.info("Transformed value: " + vo.getStringValue());
         });
-        
-        // NOTE: <- krLogger.close();
+
+        /* NOTE: for multiple VO
+        for (Object o: objects) {
+            if (o instanceof BasicVO) {
+                logger.debug("Basic-Transaction-System Transformed value: " + ((BasicVO) o).getTransaction().getSystem());
+            } else if (o instanceof AnotherVO) {
+                logger.debug("Second Transformed value: " + ((AnotherVO) o).getStringValue());
+            }
+        }
+        */
     }
 
     private static void assertEquals(String s, String stringValue) {
