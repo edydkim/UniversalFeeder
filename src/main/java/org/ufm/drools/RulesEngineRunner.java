@@ -8,9 +8,12 @@ import org.drools.runtime.StatefulKnowledgeSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.annotation.concurrent.ThreadSafe;
+
 /**
  * Created by edydkim on 2015/08.
  */
+@ThreadSafe 
 public class RulesEngineRunner {
     private static final Logger logger = LoggerFactory.getLogger(RulesEngineRunner.class);
 
