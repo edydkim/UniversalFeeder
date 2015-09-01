@@ -19,7 +19,7 @@ public class RulesEngineRunner {
 
     private static KnowledgeBase kbase;
     
-    // Thread-Safe
+    // Singleton
     private RulesEngineRunner() {}
 
     private static class RuleEngineRunnerHolder {
