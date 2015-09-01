@@ -6,6 +6,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.xml.sax.SAXException;
 
+import javax.annotation.concurrent.ThreadSafe;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -16,6 +17,7 @@ import static org.joox.JOOX.$;
 /**
  * Created by edydkim on 2015/08.
  */
+@ThreadSafe
 public class XMLBasedVO<T> implements VO<T> {
     // XML Message
     private String message;
@@ -24,7 +26,7 @@ public class XMLBasedVO<T> implements VO<T> {
     private String ref;
 
     // DOM
-    private static Document document;
+    private Document document;
 
     // Transaction
     private static Transaction transaction;
@@ -42,11 +44,12 @@ public class XMLBasedVO<T> implements VO<T> {
         return this.ref;
     }
 
+    // Thread-Safe
     public XMLBasedVO(String message) throws IOException, SAXException {
         this.message = message;
 
         this.document = JOOX.builder().parse(new ByteArrayInputStream(message.getBytes()));
-        this.transaction = new Transaction();
+        this.transaction = new Transaction(document);
 
         // Init for filtering
         this.ref = this.getTransaction().getSystem();
@@ -63,14 +66,14 @@ public class XMLBasedVO<T> implements VO<T> {
 
         // TODO: add more, see the matrix for further req..
 
-        public Transaction() {
+        public Transaction(Document document) {
             this.system = $(document).filter(this.getClass().getSimpleName()).attr(TransactionEnum.TRANSACTION_SYSTEM.attribute());
             this.user = $(document).filter(this.getClass().getSimpleName()).attr(TransactionEnum.TRANSACTION_USER.attribute());
             this.version = $(document).filter(this.getClass().getSimpleName()).attr(TransactionEnum.TRANSACTION_VERSION.attribute());
 
-            this.entity = new Entity();
-            this.price = new Price();
-            this.charge = new Charge();
+            this.entity = new Entity(document);
+            this.price = new Price(document);
+            this.charge = new Charge(document);
         }
 
         public String getSystem() {
@@ -124,7 +127,7 @@ public class XMLBasedVO<T> implements VO<T> {
         public static class Entity {
             private String v;
 
-            public Entity() {
+            public Entity(Document document) {
                 this.v = $(document).find(this.getClass().getSimpleName()).attr(TransactionEnum.ENTITY_V.attribute());
             }
 
@@ -142,7 +145,7 @@ public class XMLBasedVO<T> implements VO<T> {
             private String type;
             private String value;
 
-            public Price() {
+            public Price(Document document) {
                 this.qualifier = $(document).find(this.getClass().getSimpleName()).attr(TransactionEnum.PRICE_QUALIFIER.attribute());
                 this.type = $(document).find(this.getClass().getSimpleName()).attr(TransactionEnum.PRICE_TYPE.attribute());
                 this.value = $(document).find(this.getClass().getSimpleName()).attr(TransactionEnum.PRICE_VALUE.attribute());
@@ -179,7 +182,7 @@ public class XMLBasedVO<T> implements VO<T> {
 
             private Map<String, String> chargeMap = new HashMap<>();
 
-            public Charge() {
+            public Charge(Document document) {
                 for (Element element : $(document).find(this.getClass().getSimpleName())) {
                     chargeMap.put(element.getAttribute(TransactionEnum.CHARGE_TYPE.attribute()), element.getAttribute(TransactionEnum.CHARGE_AMOUNT.attribute()));
                 }
