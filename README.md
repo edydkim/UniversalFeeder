@@ -1,7 +1,7 @@
 ## UniversalFeeder
 Universal UpStream Feeder Manager for BI - Data Analysing and Mining.
 
-Supporting for Reactive Platform - Asynchronous and Event Handler
+Supporting for Reactive Platform - Asynchronous and Event Handler, Scalable System - Scale-Out on Multi-Threading (Thread-Safe)
 
 see below for details..
 
@@ -21,6 +21,8 @@ JMS
 Google Guava
 
 Google joox
+
+Commons Codec (Base64)
 
 ## Build
 Maven
