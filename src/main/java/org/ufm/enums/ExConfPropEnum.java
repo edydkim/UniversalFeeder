@@ -11,6 +11,7 @@ import java.util.Properties;
 public enum ExConfPropEnum {
     EXTERNAL_SYSTEM("external.system")
     , QN_EXTERNAL_WORKER("qn.external.worker")
+    , THREAD_MAX_SIZE("thread.max.size")
     ;
 
     private String value;
