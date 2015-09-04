@@ -1,6 +1,6 @@
 package org.ufm.common.db;
 
-import org.ufm.enums.ApplicationPropEnum;
+import org.ufm.enums.ExConfPropEnum;
 import org.ufm.enums.DataSourcePropEnum;
 import org.ufm.util.Cryptor;
 import com.jolbox.bonecp.BoneCP;
@@ -42,8 +42,8 @@ public class ConnectionPool {
         config.setJdbcUrl(DataSourcePropEnum.URL.value());
         config.setUsername(DataSourcePropEnum.USER.value());
         config.setPassword(Cryptor.decrypt(DataSourcePropEnum.PASSWORD.value()));
-        config.setMinConnectionsPerPartition(Integer.parseInt(ApplicationPropEnum.THREAD_MAX_SIZE.value()));
-        config.setMaxConnectionsPerPartition(Integer.parseInt(ApplicationPropEnum.THREAD_MAX_SIZE.value()) * 2);
+        config.setMinConnectionsPerPartition(Integer.parseInt(ExConfPropEnum.THREAD_MAX_SIZE.value()));
+        config.setMaxConnectionsPerPartition(Integer.parseInt(ExConfPropEnum.THREAD_MAX_SIZE.value()) * 2);
         config.setPartitionCount(1);
         // <- config.setLazyInit(true);
 
