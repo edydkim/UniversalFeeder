@@ -29,7 +29,7 @@ public class XMLBasedVO<T> implements VO<T> {
     private Document document;
 
     // Transaction
-    private static Transaction transaction;
+    private Transaction transaction;
 
     public Transaction getTransaction() {
         return transaction;
@@ -55,7 +55,7 @@ public class XMLBasedVO<T> implements VO<T> {
         this.ref = this.getTransaction().getSystem();
     }
 
-    public static class Transaction {
+    public class Transaction {
         private String system;
         private String user;
         private String version;
@@ -124,7 +124,7 @@ public class XMLBasedVO<T> implements VO<T> {
             this.charge = charge;
         }
 
-        public static class Entity {
+        public class Entity {
             private String v;
 
             public Entity(Document document) {
@@ -140,7 +140,7 @@ public class XMLBasedVO<T> implements VO<T> {
             }
         }
 
-        public static class Price {
+        public class Price {
             private String qualifier;
             private String type;
             private String value;
@@ -176,7 +176,7 @@ public class XMLBasedVO<T> implements VO<T> {
             }
         }
 
-        public static class Charge {
+        public class Charge {
             private Set<String> types;
             private Collection<BigDecimal> amounts;
 
