@@ -18,7 +18,7 @@ public class ConnectionPool {
     // non-static for unknown allocated memory size
     private BoneCP boneCP;
 
-    // Sigleton
+    // Singleton
     private ConnectionPool() {
         try {
             Class.forName(DataSourcePropEnum.DRIVER.value()).newInstance();
