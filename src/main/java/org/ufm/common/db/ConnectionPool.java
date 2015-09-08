@@ -15,9 +15,10 @@ import java.sql.SQLException;
 public class ConnectionPool {
     private static final Logger logger = LoggerFactory.getLogger(ConnectionPool.class);
 
+    // non-static for unknown allocated memory size
     private BoneCP boneCP;
 
-    // Thread-Safe
+    // Sigleton
     private ConnectionPool() {
         try {
             Class.forName(DataSourcePropEnum.DRIVER.value()).newInstance();
