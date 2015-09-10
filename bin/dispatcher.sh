@@ -14,8 +14,9 @@ CP_JAR="/home/${WHOAMI}/projects/org/ufm/out/artifacts/UniversalFeeder_jar/Unive
 # $> sort /tmp/gcore.log | uniq -c | sort -nr | less
 # $> strings -a /tmp/gcore.log > /tmp/string.log
 
+# Notice for -XX Options: Using MaxGCMinorPauseMillis as minor pause goal is deprecatedand will likely be removed in future release
 # Normal Deployment
-${JAVA_HOME}/bin/java -cp ${CP_JAR} -Dfile.encoding=UTF-8 -Xms256m -Xmx512m -verbose:gc -Xloggc:/tmp/gc.log.`date +%Y%m%d%H%M%S` -XX:MetaspaceSize=128m -XX:MaxMetaspaceSize=256m -XX:MaxDirectMemorySize=512m -XX:+PrintFlagsFinal -XX:+PrintGCDetails -XX:+UseGCLogFileRotation -XX:NumberOfGCLogFiles=5 -XX:GCLogFileSize=50M -XX:+TraceGen1Time -XX:+TraceGen0Time -XX:+PrintGCTimeStamps -XX:+PrintGCDateStamps -XX:+UseParallelGC -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=/tmp -XX:ErrorFile=dispatcher.error -XX:OnOutOfMemoryError="onError.sh" Main 1>/dev/null &
+${JAVA_HOME}/bin/java -cp ${CP_JAR} -Dfile.encoding=UTF-8 -Xms256m -Xmx512m -verbose:gc -Xloggc:/tmp/gc.log.`date +%Y%m%d%H%M%S` -XX:MetaspaceSize=256m -XX:MaxMetaspaceSize=256m -XX:MaxDirectMemorySize=512m -XX:MaxGCPauseMillis=200 -XX:+PrintFlagsFinal -XX:+PrintGCDetails -XX:+UseGCLogFileRotation -XX:NumberOfGCLogFiles=5 -XX:GCLogFileSize=50M -XX:+TraceGen1Time -XX:+TraceGen0Time -XX:+PrintGCTimeStamps -XX:+PrintGCDateStamps -XX:+UseParallelGC -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=/tmp -XX:ErrorFile=dispatcher.error -XX:OnOutOfMemoryError="onError.sh" Main 1>/dev/null &
 
 # Maven Deployment
 # <- ${JAVA_HOME}/bin/java -jar ${TARGET_PATH} -Dfile.encoding=UTF-8 -Xms256m -Xmx512m -verbose:gc -XX:+PrintGCDetails -XX:+PrintGCTimeStamps -XX:+UseParallelGC -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=dispatcher.dump -XX:ErrorFile=dispatcher.error -XX:OnOutOfMemoryError="touch OnOutOfMemoryError.dispatcher" Main 1>/dev/null &
