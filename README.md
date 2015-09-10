@@ -35,3 +35,6 @@ $>mvn spring-boot:run
 
 ## Messaging Queue
 MQ Service
+
+## CommandLine flags (for low specs), cf. bin/dispatch.sh
+-XX:ErrorFile=processor.error -XX:GCLogFileSize=52428800 -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=/tmp -XX:InitialHeapSize=268435456 -XX:MaxDirectMemorySize=536870912 -XX:MaxHeapSize=536870912 -XX:MaxMetaspaceSize=268435456 -XX:MetaspaceSize=134217728 -XX:NumberOfGCLogFiles=5 -XX:OnOutOfMemoryError=onError.sh -XX:+PrintFlagsFinal -XX:+PrintGC -XX:+PrintGCDetails -XX:+PrintGCTimeStamps -XX:+TraceGen0Time -XX:+TraceGen1Time -XX:+UseCompressedClassPointers -XX:+UseCompressedOops -XX:+UseGCLogFileRotation -XX:+UseParallelGC
