@@ -46,6 +46,9 @@ public class ConnectionPool {
         config.setMinConnectionsPerPartition(Integer.parseInt(ExConfPropEnum.THREAD_MAX_SIZE.value()));
         config.setMaxConnectionsPerPartition(Integer.parseInt(ExConfPropEnum.THREAD_MAX_SIZE.value()) * 2);
         config.setPartitionCount(1);
+        config.setCloseConnectionWatchTimeout(10, TimeUnit.SECONDS);
+        config.setConnectionTimeout(10, TimeUnit.SECONDS);
+        config.setIdleMaxAge(60, TimeUnit.MINUTES);
         // <- config.setLazyInit(true);
 
         // setup the connection pool
