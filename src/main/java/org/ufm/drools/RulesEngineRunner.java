@@ -9,6 +9,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.annotation.concurrent.ThreadSafe;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collection;
 
 /**
  * Created by edydkim on 2015/08.
@@ -20,7 +23,9 @@ public class RulesEngineRunner {
     private static KnowledgeBase kbase;
     
     // Singleton
-    private RulesEngineRunner() {}
+    private RulesEngineRunner() {
+        setup();
+    }
 
     private static class RuleEngineRunnerHolder {
         private static final RulesEngineRunner instance = new RulesEngineRunner();
@@ -45,20 +50,26 @@ public class RulesEngineRunner {
     }
 
     public Collection<Object> doFact(VO vo) throws IOException, SAXException {
-        if (kbase == null)  setup();
-
         StatefulKnowledgeSession ksession = kbase.newStatefulKnowledgeSession();
         
+        Collection<Object> collection = new ArrayList<>();
+        
         // NOTE: <- KnowledgeRuntimeLogger krLogger = KnowledgeRuntimeLoggerFactory.newFileLogger(ksession, "basic");
+        
+        try {
+            ksession.insert(vo);
 
-        ksession.insert(vo);
-
-        ksession.setGlobal("logger", logger);
-        ksession.fireAllRules();
+            ksession.setGlobal("logger", logger);
+            ksession.fireAllRules();
+            
+            collection.addAll(ksession.getObjects());
+        } finally {
+            ksession.dispose();
+        }
 
         // <- logger.close();
 
-        return ksession.getObjects();
+        return collection;
     }
 
     public static void main(String[] args) {
