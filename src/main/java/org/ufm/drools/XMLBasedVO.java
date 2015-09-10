@@ -48,7 +48,13 @@ public class XMLBasedVO<T> implements VO<T> {
     public XMLBasedVO(String message) throws IOException, SAXException {
         this.message = message;
 
-        this.document = JOOX.builder().parse(new ByteArrayInputStream(message.getBytes()));
+        final ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(message.getBytes());
+        try {
+            this.document = JOOX.builder().parse(byteArrayInputStream);
+        } finally {
+            byteArrayInputStream.close();
+        }
+        
         this.transaction = new Transaction(document);
 
         // Init for filtering
