@@ -56,14 +56,21 @@ public class RulesEngineRunner {
         
         // NOTE: <- KnowledgeRuntimeLogger krLogger = KnowledgeRuntimeLoggerFactory.newFileLogger(ksession, "basic");
         
+        FactHandle factHandle = null;
         try {
-            ksession.insert(vo);
-
+            factHandle = ksession.insert(vo);
+            
+            // logger
             ksession.setGlobal("logger", logger);
+        
             ksession.fireAllRules();
             
             collection.addAll(ksession.getObjects());
         } finally {
+            // IMPORTANT: PREVENTION FOR LEAK ISSUE
+            if (factHandle != null) ksession.retract(factHandle);
+            // NOTE: when inserting multiple vo to session
+            // ksession.getFactHandles().forEach(ksession::retract);
             ksession.dispose();
         }
 
