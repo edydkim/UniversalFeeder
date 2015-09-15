@@ -1,8 +1,7 @@
 // For Drools Here..
 package org.ufm.drools.rules
 
-import org.ufm.drools.BasicVO
-import org.ufm.drools.AnotherVO
+import org.ufm.drools.XMLBasedVO
 import org.slf4j.Logger;
 
 global Logger logger;
@@ -10,18 +9,13 @@ global Logger logger;
 rule "Basic Transaction Transforming Rule"
     // no-loop
     when
-        $vo: BasicVO(stringValue in ("first"), $booleanValue: booleanValue)
-    eval($booleanValue)
+        $vo: XMLBasedVO(transaction.system in ("Default")
+            ,$version : transaction.version)
     then
-        System.out.println("First Rule");
-        $vo.setStringValue("Done.");    
-    end
-
-rule "Another Transaction Transforming Rule"
-    // no-loop
-    when
-        $vo: AnotherVO(stringValue == "second")
-    then
-        System.out.println("Second Rule");
-        $vo.setStringValue("Done.");    
+        logger.debug("XMLBasedVO Rule");
+        
+        if ($version == null && "".equals($version))
+            $vo.getTransaction().getEntity().setV("None");    
+            
+        // NOTE: calling Singleton class - $vo...set(Singleton.getInstance().getValue($parameters...));
     end
