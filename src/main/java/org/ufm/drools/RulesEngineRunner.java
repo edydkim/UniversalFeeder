@@ -58,6 +58,7 @@ public class RulesEngineRunner {
         
         FactHandle factHandle = null;
         try {
+            // NOTE: multiple inserting may cause the Drools Rule parsing performance low
             factHandle = ksession.insert(vo);
             
             // logger
