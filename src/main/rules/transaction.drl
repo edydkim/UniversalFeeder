@@ -6,7 +6,6 @@ import org.slf4j.Logger;
 
 global Logger logger;
 
-// NOTE: multiple inserting may cause the Drools Rule parsing performance low
 rule "Basic Transaction Transforming Rule"
     // no-loop
     when
