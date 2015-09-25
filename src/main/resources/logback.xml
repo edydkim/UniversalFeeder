@@ -15,15 +15,11 @@
             <maxHistory>30</maxHistory>
 
             <!-- file size based rollover -->
-            <!--
             <timeBasedFileNamingAndTriggeringPolicy
                     class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
-            -->
                 <!-- or whenever the file size reaches 100MB -->
-            <!--
                 <maxFileSize>100MB</maxFileSize>
             </timeBasedFileNamingAndTriggeringPolicy>
-            -->
         </rollingPolicy>
         <encoder>
             <pattern>%date %level [%thread] %logger{10} [%file:%line] %msg%n</pattern>
