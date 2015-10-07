@@ -82,6 +82,16 @@ public class RulesEngineRunner {
 
     public static void main(String[] args) {
         Collection<Object> objects = RulesEngineRunner.getInstance().doFact(new BasicVO(""));
+        // NOTE: In current version facts is not sharable, but if facts is volatile so that need to CompareAndGet  convert to Atomic - AtomicReference<Collection<Object>> facts = new AtomicReference<Collection<Object>>();
+        /* e.g., 
+        try {
+            facts = ulesEngineRunner.getInstance().doFact(new BasicVO(""));
+            ...
+        } catch (Exception e) {
+            // Fault-Tolerance 
+            throw new UserDefinedException("Keep going on...", e);
+        }
+        */
 
         ksession.getObjects().stream().filter(o -> o instanceof BasicVO).forEach(o -> {
             assertEquals("Done.", ((BasicVO) o).getStringValue());
