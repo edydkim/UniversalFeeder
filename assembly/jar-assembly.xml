@@ -1,0 +1,35 @@
+<assembly>
+    <id>${item}-full</id>
+    <formats>
+        <format>jar</format>
+    </formats>
+    <includeBaseDirectory>false</includeBaseDirectory>
+    <dependencySets>
+        <dependencySet>
+            <outputDirectory>/</outputDirectory>
+            <unpack>true</unpack>
+            <scope>runtime</scope>
+        </dependencySet>
+    </dependencySets>
+    <fileSets>
+        <!-- exclude target directory
+            <fileSet>
+                <directory>${project.build.outputDirectory}</directory>
+            </fileSet>
+        -->
+        <fileSet>
+            <outputDirectory>.</outputDirectory>
+            <directory>${project.basedir}/src/main/rules</directory>
+            <includes>
+                <include>**</include>
+            </includes>
+        </fileSet>
+        <fileSet>
+            <outputDirectory>.</outputDirectory>
+            <directory>${project.basedir}/src/main/${item}/resources</directory>
+            <includes>
+                <include>**</include>
+            </includes>
+        </fileSet>
+    </fileSets>
+</assembly>
